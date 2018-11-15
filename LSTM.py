@@ -214,13 +214,13 @@ print(train_X.shape, train_y.shape, test_X.shape, test_y.shape)
 
 # design network
 model = Sequential()
-model.add(LSTM(100, activation='tanh', input_shape=(train_X.shape[1], train_X.shape[2]), dropout=0.3, return_sequences=True))
-model.add(LSTM(50, activation='tanh', dropout=0.3, return_sequences=False))
+model.add(LSTM(20, activation='tanh', input_shape=(train_X.shape[1], train_X.shape[2]), dropout=0.3, return_sequences=True))
+model.add(LSTM(10, activation='tanh', dropout=0.3, return_sequences=False))
 model.add(Dense(10))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam', metrics=['accuracy'])
 # fit network
-history = model.fit(train_X, train_y, epochs=100, batch_size=72, validation_data=[test_X, test_y], shuffle=False, verbose=2)
+history = model.fit(train_X, train_y, epochs=20, batch_size=72, validation_data=[test_X, test_y], shuffle=False, verbose=2)
 # plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')
@@ -244,6 +244,13 @@ pred = DataFrame(inv_yhat)
 act = DataFrame(inv_y)
 results = concat([pred, act], axis=1)
 results.to_excel('Prediction.xlsx')
+
+# plot history
+pyplot.plot(pred, label='pred')
+pyplot.plot(act, label='real')
+pyplot.legend()
+pyplot.show()
+
 
 # calculate RMSE
 rmse = sqrt(mean_squared_error(inv_y, inv_yhat))
