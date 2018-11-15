@@ -1,4 +1,8 @@
 '''
+
+link:https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/
+https://machinelearningmastery.com/time-series-forecasting-long-short-term-memory-network-python/
+
 from math import sqrt
 from numpy import concatenate
 from matplotlib import pyplot
